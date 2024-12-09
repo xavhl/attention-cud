@@ -1,0 +1,89 @@
+*** test 1: sequential vs openmp vs cuda ***
+
+attention_sequential
+config=(1,8,8): 0.000021
+config=(8,32,32): 0.002253
+
+attention_openmp
+config=(1,8,8): 0.002335
+config=(8,32,32): 0.003359
+
+attention_cuda
+config=(1,8,8): 0.000368
+config=(8,32,32): 0.000476
+
+*** test 2: simple vs transposed vs tiling (thread) vs tiling (block) vs flash vs flash multi ***
+
+attention_cuda
+-m
+t
+config=(1,8,8): 0.000383
+config=(8,32,32): 0.000521
+
+attention_cuda_tile
+config=(1,8,8): 0.000470
+config=(8,32,32): 0.000565
+
+attention_cuda_tile
+-m
+r
+config=(1,8,8): 0.000470
+config=(8,32,32): 0.000569
+
+attention_flash
+config=(1,8,8): 0.000231
+config=(8,32,32): 0.000477
+
+attention_flash
+-m
+m
+config=(1,8,8): 0.000346
+config=(8,32,32): 0.000617
+
+*** test 3 (unified memory): tiling (block) vs flash vs flash multi ***
+
+attention_cuda_tile
+-m
+r
+-u
+config=(1,8,8): 0.000472
+config=(8,32,32): 0.000475
+
+attention_flash
+-u
+config=(1,8,8): 0.000238
+config=(8,32,32): 0.000462
+
+attention_flash
+-m
+m
+-u
+config=(1,8,8): 0.000285
+config=(8,32,32): 0.000284
+
+*** test 4 (tile size): tiling (thread) vs tiling (block) ***
+
+b=1 s=2 e=2
+
+attention_cuda_tile
+tile=1: 0.000468
+tile=4: 0.000464
+tile=8: 0.000466
+tile=16: 0.000471
+tile=32: 0.000467
+
+attention_cuda_tile
+-m
+r
+tile=1: 0.000471
+tile=4: 0.000470
+tile=8: 0.000470
+tile=16: 0.000467
+tile=32: 0.000467
+
+*** test 5 (separate operations) using "tiling (block)" ***
+
+attention_cuda_tile -m r
+
+config=(1,8,8): 0.076619 0.000065 0.000393 0.000013
+config=(8,32,32): 0.076360 0.000154 0.000396 0.000020

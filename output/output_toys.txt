@@ -1,0 +1,94 @@
+Running toy tests...
+num_batch=2 sequence_length=2 embed_dim=2
+
+*** attention_sequential ***
+./attention_sequential -b 2 -e 2 -s 2 -t
+0.000023
+q=
+0.0010 0.1791 
+0.9395 0.4140 
+0.5304 0.9320 
+0.7865 0.5004 
+
+k=
+0.5535 0.9672 
+0.1708 0.8882 
+0.2087 0.2524 
+0.5758 0.1531 
+
+v=
+0.5514 0.9469 
+0.1601 0.2216 
+0.3508 0.4730 
+0.4441 0.4437 
+
+o=
+0.3568 0.5861 
+0.3827 0.6342 
+0.3991 0.4578 
+0.4014 0.4571 
+
+
+***attention_openmp ***
+./attention_openmp -b 2 -s 2 -e 2 -t
+0.002480
+o=
+0.3568 0.5861 
+0.3827 0.6342 
+0.3991 0.4578 
+0.4014 0.4571 
+
+***attention_cuda simple ***
+./attention_cuda -b 2 -s 2 -e 2 -t
+0.001074o=
+0.3568 0.5861 
+0.3827 0.6342 
+0.3991 0.4578 
+0.4014 0.4571 
+
+***attention_cuda transposed ***
+./attention_cuda -b 2 -s 2 -e 2 -m t -t
+0.000366o=
+0.3568 0.5861 
+0.3827 0.6342 
+0.3991 0.4578 
+0.4014 0.4571 
+
+***attention_cuda_tile single ***
+./attention_cuda_tile -b 2 -s 2 -e 2 -t
+0.001280
+o=
+0.3568 0.5861 
+0.3827 0.6342 
+0.3991 0.4578 
+0.4014 0.4571 
+
+***attention_cuda_tile reduced ***
+./attention_cuda_tile -b 2 -s 2 -e 2 -m r -t
+0.000469
+o=
+0.3568 0.5861 
+0.3827 0.6342 
+0.3991 0.4578 
+0.4014 0.4571 
+
+***attention_flash single ***
+./attention_flash -b 2 -s 2 -e 2 -t
+Max shared memory: 49152, requested shared memory: 64 
+0.000980
+o=
+0.3568 0.5861 
+0.3827 0.6342 
+0.3991 0.4578 
+0.4014 0.4571 
+
+***attention_flash multi ***
+./attention_flash -b 2 -s 2 -e 2 -m m -t
+device[0] max shared memory: 49152, requested shared memory: 64 
+device[1] max shared memory: 49152, requested shared memory: 64 
+0.000368
+o=
+0.3568 0.5861 
+0.3827 0.6342 
+0.3991 0.4578 
+0.4014 0.4571 
