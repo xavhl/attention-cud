@@ -2,9 +2,9 @@
 Project for CSCI-GA.3033 GPUs: Architecture and Programming. Parallization of self-attention with OpenMP and CUDA.
 
 ## Implementations
-1. Sequential (<a href="src/attention_sequential.cpp">attention_sequential.cpp</a>)
-2. OpenMP (<a href="src/attention_openmp.cpp">attention_openmp.cpp</a>)
-3. CUDA (<a href="src/attention_cuda.cu">attention_cuda.cu</a>, <a href="src/attention_cuda_tile.cu">attention_cuda_tile.cu</a>, <a href="src/attention_flash.cu">attention_flash.cu</a>)
+1. Sequential // <a href="src/attention_sequential.cpp">attention_sequential.cpp</a>
+2. OpenMP // <a href="src/attention_openmp.cpp">attention_openmp.cpp</a>
+3. CUDA // <a href="src/attention_cuda.cu">attention_cuda.cu</a>, <a href="src/attention_cuda_tile.cu">attention_cuda_tile.cu</a>, <a href="src/attention_flash.cu">attention_flash.cu</a>
 
 Specifically, for CUDA, 6 different versions were implemented:
 
@@ -16,7 +16,7 @@ Specifically, for CUDA, 6 different versions were implemented:
 6. flash multi // extension of multi-device
 
 Data
-- random matrices with dimension of (num_batch, sequence_length, embed_dim)
+- random matrices with dimension of (num_batch, sequence_length, embed_dim) // <a href="src/matrix_io.cpp">matrix_io.cpp</a>
 
 Evaluation
 - compute time of memory allocation, copying (between host and device), and kernel execution
@@ -31,8 +31,10 @@ see <a href="results.md">results.md</a>
 
 ## Executions
 
+To replicate results:
 ```bash
 > cd src
 > make clean && make && make run > ../output/output_toys.txt # results of toy example with config (2,2,2)
 > run.sh # results of experiments
 ```
+Command to compile individual program can be found at the end of each file
