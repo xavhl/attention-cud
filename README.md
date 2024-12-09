@@ -21,7 +21,7 @@ Data
 Evaluation
 - compute time of memory allocation, copying (between host and device), and kernel execution
 
-Assumption (for more simplified formulation):
+Assumption (for simplified formulation):
 -  *square* matrices as input
 -  num_head = 1
 
